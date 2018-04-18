@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<h1> Welcome to my guestbook! </h1>
+
+<p><a href="/add">Add a message</a></p>
+
+{% for e in entries %}
+    <div class="entry">
+        <form action="/modify" method="POST">
+            <p class="entrytext"> {{e['text']}} </p>
+            <p><textarea name="new_message" rows=3 cols=50></textarea><input type="submit" value="modify"></p>
+            <p class="metadata"> by {{e['author']}} on {{e['timestamp']}} </p>
+            <input type="hidden" name="id" value= {{e['id']}}>
+        </form>
+        <form action="/delete" method="POST">
+            <!-- <p class="metadata"> id:{{e['id']}} </p> -->
+            <p class="metadata"><input type="hidden" name="id" value= {{e['id']}} >id:{{e['id']}}</p>
+            <p><input type="submit" value="X"></p>
+        </form>
+    </div>
+{% endfor %}
